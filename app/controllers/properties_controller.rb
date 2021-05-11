@@ -10,7 +10,7 @@ class PropertiesController < ApplicationController
   end
 
   def create
-    Property.create(property_params)
+    @property = Property.create(property_params)
     if @property.save
       redirect_to properties_path, notice: "物件を登録しました"
     else
@@ -19,14 +19,19 @@ class PropertiesController < ApplicationController
   end  
 
   def show
+    @stations = @property.stations
   end
 
   def edit
+    @property.stations.build
   end
 
   def update
-    @property.update(property_params)
-    redirect_to properties_path, notice: "物件を編集しました"
+    if @property.update(property_params)
+      redirect_to properties_path, notice: "物件を編集しました！"
+    else
+      render :edit
+    end
   end
 
   def destroy
@@ -36,7 +41,7 @@ class PropertiesController < ApplicationController
 
   private
   def property_params
-    params.require(:property).permit(:name, :rent, :address, :age_building, :remarks)
+    params.require(:property).permit(:name, :rent, :address, :age_building, :remarks, stations_attributes: [:id, :route_name, :station_name, :walking_time])
   end
 
   def set_property

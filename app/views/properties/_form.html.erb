@@ -1,4 +1,4 @@
-<%= form_with(model: @property, local: true) do |form| %>
+<%= form_with(model: @property, local: true ) do |form| %>
   <div>
     <%= form.label :物件名 %>
     <%= form.text_field :name %>
@@ -36,5 +36,5 @@
     <p><%= station.text_field :walking_time %>分</p>
     <% @num += 1 %>
   <% end %>
-  <%= form.submit '登録する'%>
+  <%= form.submit button_text %>
 <% end %>
