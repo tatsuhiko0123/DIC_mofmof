@@ -19,5 +19,22 @@
     <%= form.label :備考 %>
     <%= form.text_field :remarks %>
   </div>
+
+  <% @num = 1 %>
+  <%= form.fields_for :stations do |station| %>
+    <h3>最寄り駅<%= @num %></h3> 
+    <%= station.label :路線名 %>
+    <br>
+    <%= station.text_field :route_name %>
+    <br>
+    <%= station.label :路名 %>
+    <br>
+    <%= station.text_field :station_name %>
+    <br>
+    <%= station.label :徒歩分数 %>
+    <br>
+    <p><%= station.text_field :walking_time %>分</p>
+    <% @num += 1 %>
+  <% end %>
+  <%= form.submit '登録する'%>
 <% end %>
-<%= link_to "もどる", properties_path %>

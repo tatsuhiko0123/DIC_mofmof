@@ -1,20 +1,22 @@
 class PropertiesController < ApplicationController
+  before_action :set_property, only: [:show, :edit, :update, :destroy]
   def index
-    @property = Property.all
+    @properties = Property.all
   end
 
   def new
     @property = Property.new
+    2.times { @property.stations.build}
   end
 
   def create
-    Property.create(name: params[:property][:name], 
-                    rent: params[:property][:rent],
-                    address: params[:property][:address], 
-                    age_building: params[:property][:age_building], 
-                    remarks: params[:property][:remarksg])
-    redirect_to new_property_path
-  end
+    Property.create(property_params)
+    if @property.save
+      redirect_to properties_path, notice: "物件を登録しました"
+    else
+      render :new
+    end
+  end  
 
   def show
   end
@@ -22,6 +24,22 @@ class PropertiesController < ApplicationController
   def edit
   end
 
-  def confirm
+  def update
+    @property.update(property_params)
+    redirect_to properties_path, notice: "物件を編集しました"
+  end
+
+  def destroy
+    @property.destroy
+    redirect_to properties_path, notice: "物件を削除しました"
+  end
+
+  private
+  def property_params
+    params.require(:property).permit(:name, :rent, :address, :age_building, :remarks)
+  end
+
+  def set_property
+    @property = Property.find(params[:id])
   end
 end
