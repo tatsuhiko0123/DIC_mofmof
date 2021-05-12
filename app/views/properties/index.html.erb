@@ -4,18 +4,18 @@
   <h1>物件一覧</h1>
   <table>
     <tr>
-      <th>物件名</th>
-      <th>賃料</th>
-      <th>住所</th>
-      <th>築年数</th>
-      <th>備考</th>
+      <th class="name">物件名</th>
+      <th class="rent">賃料</th>
+      <th class="address">住所</th>
+      <th class="age">築年数</th>
+      <th class="text_area">備考</th>
     </tr>
     <% @properties.each do |property|  %>
       <tr>
         <td><%= property.name %></td>
-        <td><%= property.rent %></td>
+        <td><p><%= property.rent %>円</p></td>
         <td><%= property.address %></td>
-        <td><%= property.age_building %></td>
+        <td><p><%= property.age_building %>年</p></td>
         <td><%= property.remarks %></td>
         <td><%= link_to '詳細', property_path(property.id) %></td>
         <td><%= link_to '編集', edit_property_path(property.id) %></td>
