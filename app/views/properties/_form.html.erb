@@ -1,0 +1,42 @@
+<%= form_with(model: @property, local: true ) do |form| %>
+  <div class="form_area">
+    <div>
+      <%= form.label :物件名 %><br>
+      <%= form.text_field :name %>
+    </div>
+    <div>
+      <%= form.label :賃料 %><br>
+      <span><%= form.text_field :rent %>円</span>
+    </div>
+    <div>
+      <%= form.label :住所 %><br>
+      <%= form.text_field :address %>
+    </div>
+    <div>
+      <%= form.label :築年数 %><br>
+      <span><%= form.text_field :age_building %>年</span>
+    </div>
+    <div>
+      <%= form.label :備考 %><br>
+      <%= form.text_area :remarks %>
+    </div>
+    <hr>
+    <% @num = 1 %>
+    <%= form.fields_for :stations do |station| %>
+      <h3>最寄り駅<%= @num %></h3> 
+      <%= station.label :路線名 %>
+      <br>
+      <%= station.text_field :route_name %>
+      <br>
+      <%= station.label :路名 %>
+      <br>
+      <%= station.text_field :station_name %>
+      <br>
+      <%= station.label :徒歩分数 %>
+      <br>
+      <span><%= station.text_field :walking_time %>分</span><br>
+      <% @num += 1 %>
+    <% end %><br>
+    <%= form.submit button_text %>
+  </div>
+<% end %>
