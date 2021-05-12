@@ -10,13 +10,13 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_05_09_082933) do
+ActiveRecord::Schema.define(version: 2021_05_12_014259) do
 
   create_table "properties", force: :cascade do |t|
     t.string "name"
-    t.integer "rent"
+    t.string "rent"
     t.string "address"
-    t.integer "age_building"
+    t.string "age_building"
     t.string "remarks"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -25,7 +25,7 @@ ActiveRecord::Schema.define(version: 2021_05_09_082933) do
   create_table "stations", force: :cascade do |t|
     t.string "route_name"
     t.string "station_name"
-    t.time "walking_time"
+    t.string "walking_time"
     t.integer "property_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
